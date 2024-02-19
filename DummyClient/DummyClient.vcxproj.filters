@@ -6,6 +6,8 @@
     <ClInclude Include="DummyConnection.h" />
     <ClInclude Include="PacketHandler.h" />
     <ClInclude Include="DataManager.h" />
+    <ClInclude Include="DummyConnectionContext.h" />
+    <ClInclude Include="DummyPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -14,5 +16,7 @@
     <ClCompile Include="DummyConnection.cpp" />
     <ClCompile Include="PacketHandler.cpp" />
     <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="DummyConnectionContext.cpp" />
+    <ClCompile Include="DummyPlayer.cpp" />
   </ItemGroup>
 </Project>

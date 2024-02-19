@@ -3,6 +3,8 @@
 #include "DummyConnection.h"
 #include "IOCPCore.h"
 #include "ThreadManager.h"
+#include "DummyConnectionContext.h"
+#include "MapManager.h"
 unsigned int _stdcall Dispatch(void* Args)
 {
 	MyDummyClientApp* app = reinterpret_cast<MyDummyClientApp*>(Args);
@@ -23,6 +25,11 @@ int main()
 	printf("SQ Offset?\n");
 	scanf_s("%d", &offset);
 
+	if (enterServer == 30004) 
+	{
+		MapManager::GetInstance()->MapLoad("C:\\Users\\jgkang\\Desktop\\map\\VillageMap.dat");
+	}
+
 	MyDummyClientApp dummyClientApp(dummyCount, ip, enterServer, offset, DummyConnection::MakeGameSession);
 	DataManager::GetInstance()->app = &dummyClientApp;
 
@@ -35,6 +42,23 @@ int main()
 		ThreadManager::GetInstacne()->Launch(Dispatch, &dummyClientApp);
 
 	dummyClientApp.Start();
+	int32 currentTick = ::GetTickCount64();
+	int32 lastTick = 0;
+	while (true) 
+	{
+		currentTick = ::GetTickCount64();
+		
+		if (lastTick == 0)
+			lastTick = currentTick;
+
+		int32 deltaTick = currentTick - lastTick;		
+		if (deltaTick >= 200) 
+		{
+			DummyConnectionContext::GetInstance()->Update(deltaTick);
+			Sleep(200);
+			lastTick = currentTick;
+		}
+	}
 
 	ThreadManager::GetInstacne()->AllJoin();
 	return 0;

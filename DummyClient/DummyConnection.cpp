@@ -2,6 +2,7 @@
 #include "DummyConnection.h"
 #include "ConnectionContext.h"
 #include "PacketHandler.h"
+#include "DummyPlayer.h"
 DummyConnection::DummyConnection(const SOCKET& socket, const SOCKADDR_IN& sockAddrIn)
 	:Connection(socket, sockAddrIn)
 {
@@ -46,4 +47,10 @@ void DummyConnection::RequestLogin(int32 sq)
 	pktHeader->_type = PacketProtocol::C2S_LOGIN;
 	pktHeader->_pktSize = bw.GetWriterSize();
 	Send(sendBuffer, pktHeader->_pktSize);
+}
+
+void DummyConnection::Update(int32 deltaTick)
+{
+	if (_player)
+		reinterpret_cast<DummyPlayer*>(_player)->Update(deltaTick);
 }

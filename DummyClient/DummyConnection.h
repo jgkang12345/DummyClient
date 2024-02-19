@@ -1,5 +1,6 @@
 #pragma once
 #include "Connection.h"
+class DummyPlayer;
 class DummyConnection : public Connection
 {
 private:
@@ -20,5 +21,6 @@ public:
 
 public:
 	void RequestLogin(int32 sq);
+	void Update(int32 deltaTick);
 };
 

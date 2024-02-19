@@ -2,8 +2,8 @@
 #include "PacketHandler.h"
 #include "MyDummyClientApp.h"
 #include "DummyConnection.h"
-#include "Player.h"
-#include "ConnectionContext.h"
+#include "DummyConnectionContext.h"
+#include "DummyPlayer.h"
 void PacketHandler::HandlePacket(DummyConnection* connection, BYTE* packet, int32 packetSize)
 {
 	PacketHeader* header = reinterpret_cast<PacketHeader*>(packet);
@@ -39,7 +39,7 @@ void PacketHandler::HandlePacket_S2C_LOGIN(DummyConnection* connection, BYTE* pa
 void PacketHandler::HandlePacket_S2C_PLAYERINIT(DummyConnection* connection, BYTE* packet, int32 packetSize)
 {
 	S2C_PLAYERINIT_PACKET* playerInitPacket = reinterpret_cast<S2C_PLAYERINIT_PACKET*>(packet);
-	Player* dummyPlayer = new Player(
+	DummyPlayer* dummyPlayer = new DummyPlayer(
 		static_cast<Connection*>(connection)
 		, playerInitPacket->playerPos
 		, playerInitPacket->playerName
@@ -55,5 +55,5 @@ void PacketHandler::HandlePacket_S2C_PLAYERINIT(DummyConnection* connection, BYT
 	);
 	connection->SetPlayer(dummyPlayer);
 	connection->SetConnectionId(playerInitPacket->sessionId);
-	ConnectionContext::GetInstance()->AddConnetion(playerInitPacket->sessionId, connection);
+	DummyConnectionContext::GetInstance()->AddConnetion(playerInitPacket->sessionId, connection);
 }

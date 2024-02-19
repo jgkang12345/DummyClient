@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DummyConnection.h" />
+    <ClInclude Include="DummyConnectionContext.h" />
+    <ClInclude Include="DummyPlayer.h" />
     <ClInclude Include="MyDummyClientApp.h" />
     <ClInclude Include="PacketHandler.h" />
     <ClInclude Include="pch.h" />
@@ -161,6 +163,8 @@
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DummyClient.cpp" />
     <ClCompile Include="DummyConnection.cpp" />
+    <ClCompile Include="DummyConnectionContext.cpp" />
+    <ClCompile Include="DummyPlayer.cpp" />
     <ClCompile Include="MyDummyClientApp.cpp" />
     <ClCompile Include="PacketHandler.cpp" />
     <ClCompile Include="pch.cpp">
