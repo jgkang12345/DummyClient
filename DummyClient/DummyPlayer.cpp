@@ -67,7 +67,7 @@ void DummyPlayer::UpdateIdle(int32 deltaTick)
 		bw.WriteWString(buffer, chatSize);
 		hedaer->_type = PacketProtocol::C2S_PLAYERCHAT;
 		hedaer->_pktSize = bw.GetWriterSize();
-		_connection->Send(sendBuffer, hedaer->_pktSize);
+		reinterpret_cast<DummyConnection*>(_connection)->DummySend(sendBuffer, hedaer->_pktSize);
 	}
 	else if (randomCode == 6)
 	{
@@ -183,7 +183,7 @@ void DummyPlayer::PlayerSyncSend()
 
 	pktHeader->_type = PacketProtocol::C2S_PLAYERSYNC;
 	pktHeader->_pktSize = bw.GetWriterSize();
-	_connection->Send(sendBuffer, pktHeader->_pktSize);
+	reinterpret_cast<DummyConnection*>(_connection)->DummySend(sendBuffer, pktHeader->_pktSize);
 }
 
 void DummyPlayer::PlayerSyncMap()
@@ -223,7 +223,7 @@ void DummyPlayer::PlayerSyncMap()
 
 		pktHeader->_type = PacketProtocol::C2S_MAPSYNC;
 		pktHeader->_pktSize = bw.GetWriterSize();
-		_connection->Send(sendBuffer, pktHeader->_pktSize);
+		reinterpret_cast<DummyConnection*>(_connection)->DummySend(sendBuffer, pktHeader->_pktSize);
 		_prevPos = _pos;
 	}
 }

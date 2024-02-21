@@ -51,6 +51,6 @@ void MyDummyClientApp::EnterServer(int32 playerSQ)
 		bw.Write((int32)playerSQ);
 		pktHeader->_type = PacketProtocol::C2S_PLAYERINIT;
 		pktHeader->_pktSize = bw.GetWriterSize();
-		newSession->Send(sendBuffer, bw.GetWriterSize());
+		reinterpret_cast<DummyConnection*>(newSession)->DummySend(sendBuffer, bw.GetWriterSize());
 	}
 }

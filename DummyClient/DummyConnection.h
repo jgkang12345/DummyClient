@@ -22,5 +22,6 @@ public:
 public:
 	void RequestLogin(int32 sq);
 	void Update(int32 deltaTick);
+	void DummySend(byte* packet, int32 packetSize);
 };
 

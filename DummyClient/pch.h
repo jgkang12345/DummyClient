@@ -6,3 +6,4 @@
 #endif
 #include "CorePch.h"
 #include "DataManager.h"
+#include "DummyConnection.h"
