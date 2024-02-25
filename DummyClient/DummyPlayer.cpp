@@ -38,7 +38,7 @@ void DummyPlayer::Update(int32 deltaTick)
 	case MOVE:
 		UpdateMove(deltaTick);
 		break;
-	}
+	}	
 
 	PlayerSyncMap();
 

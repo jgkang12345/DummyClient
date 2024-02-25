@@ -46,7 +46,7 @@ void DummyConnection::RequestLogin(int32 sq)
 
 	pktHeader->_type = PacketProtocol::C2S_LOGIN;
 	pktHeader->_pktSize = bw.GetWriterSize();
-	DummySend(sendBuffer, pktHeader->_pktSize);
+		DummySend(sendBuffer, pktHeader->_pktSize);
 }
 
 void DummyConnection::Update(int32 deltaTick)
