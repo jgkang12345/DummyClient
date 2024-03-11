@@ -18,7 +18,7 @@ int main()
 	int32 dummyCount;
 	printf("어떤 서버에 입장할 것입니까?\n 30002=초보자필드, 30004=마을서버\n");
 	scanf_s("%d", &enterServer);
-	const char* ip = "127.0.0.1";
+	const char* ip = "58.236.130.58";
 	printf("더미는 몇명 만들 것 입니까?\n");
 	scanf_s("%d", &dummyCount);
 	int32 offset;

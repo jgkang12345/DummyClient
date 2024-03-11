@@ -29,6 +29,20 @@ DummyPlayer::DummyPlayer(Connection* connection, const Vector3& pos, wchar* play
 void DummyPlayer::Update(int32 deltaTick)
 {
 	State prevState = _state;
+	_heartBeatSumTick += deltaTick;
+
+	if (_heartBeatSumTick >= 3000)
+	{
+		_heartBeatSumTick -= 3000;
+		BYTE sendBuffer[256] = {};
+		BinaryWriter bw(sendBuffer);
+		PacketHeader* header = bw.WriteReserve<PacketHeader>();
+		int32 tick = 0;
+		bw.Write(tick);
+		header->_type = S2C_HEARTBIT;
+		header->_pktSize = bw.GetWriterSize();
+		reinterpret_cast<DummyConnection*>(_connection)->DummySend(sendBuffer, header->_pktSize);
+	}
 
 	switch (_state)
 	{

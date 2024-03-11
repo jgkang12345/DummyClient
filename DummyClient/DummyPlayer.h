@@ -7,6 +7,7 @@ private:
 	Vector3 _vDir;
 	std::vector<Pos> _path;
 	std::vector<Pos> _conner;
+	int32 _heartBeatSumTick = 0;
 public:
 	DummyPlayer(
 		Connection* connection
