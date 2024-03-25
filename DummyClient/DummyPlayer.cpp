@@ -144,6 +144,12 @@ void DummyPlayer::PatrolDestSearch()
 
 	_destPos = Vector3{ target_x + 0.5f, 0, target_z + 0.5f };
 	MapManager::GetInstance()->FindPath(_destPos, _pos, _path);
+	if (_path.empty())
+	{
+		_state = State::IDLE;
+		return;
+	}
+
 
 	Vector3 dir = Vector3{ _path[0].x + 0.5f, 0, _path[0].z + 0.5f } - _pos;
 	_vDir = dir.Normalized();

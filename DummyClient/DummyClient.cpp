@@ -11,6 +11,34 @@ unsigned int _stdcall Dispatch(void* Args)
 	while (true)
 		app->GetIOCPCore()->Dispatch();
 }
+void NoviceServerInit();
+void VillageServerInit();
+void InterMediateServerInit();
+void HightServerInit();
+
+void HightServerInit()
+{
+	DataManager::GetInstance()->serverType = ServerType::HIGH;
+	MapManager::GetInstance()->MapLoadField(ServerType::HIGH, "map\\HighFieldMap.dat");
+}
+
+void NoviceServerInit()
+{
+	DataManager::GetInstance()->serverType = ServerType::NOVICE;
+	MapManager::GetInstance()->MapLoadField(ServerType::NOVICE, "map\\NoviceFieldMap.dat");
+}
+
+void InterMediateServerInit()
+{
+	DataManager::GetInstance()->serverType = ServerType::INTERMEDIATE;
+	MapManager::GetInstance()->MapLoadField(ServerType::INTERMEDIATE, "map\\IntermediateFieldMap.dat");
+}
+
+void VillageServerInit()
+{
+	DataManager::GetInstance()->serverType = ServerType::VILLAGE;
+	MapManager::GetInstance()->MapLoad(ServerType::VILLAGE, "map\\VillageMap.dat");
+}
 
 int main() 
 {
@@ -25,9 +53,27 @@ int main()
 	printf("SQ Offset?\n");
 	scanf_s("%d", &offset);
 
-	if (enterServer == 30004) 
+	switch (enterServer)
 	{
-		MapManager::GetInstance()->MapLoad("C:\\Users\\jgkang\\Desktop\\map\\VillageMap.dat");
+	case 30007:
+	case 30008:
+		NoviceServerInit();
+		break;
+
+	case 30004:
+	case 30005:
+	case 30006:
+		VillageServerInit();
+		break;
+
+	case 30009:
+		InterMediateServerInit();
+		break;
+
+	case 30010:
+	case 30011:
+		HightServerInit();
+		break;
 	}
 
 	MyDummyClientApp dummyClientApp(dummyCount, ip, enterServer, offset, DummyConnection::MakeGameSession);

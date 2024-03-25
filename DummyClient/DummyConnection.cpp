@@ -24,6 +24,7 @@ void DummyConnection::OnDisconnect()
 
 void DummyConnection::OnConnect()
 {
+
 }
 
 void DummyConnection::RequestLogin(int32 sq)

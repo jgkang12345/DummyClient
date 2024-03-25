@@ -3,6 +3,9 @@
 class DummyPlayer;
 class DummyConnection : public Connection
 {
+public:
+	Vector3 pos;
+
 private:
 	WCHAR _username[50] = {};
 	int32 _lastServerPort;
