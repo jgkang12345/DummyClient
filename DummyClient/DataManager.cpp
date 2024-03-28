@@ -20,12 +20,12 @@ DataManager::DataManager()
 	noviceStartPosVector.push_back({90,167});
 
 	std::vector<Pos> intermediateStartPosVector;
-	noviceStartPosVector.push_back({ 50, 54 });
-	noviceStartPosVector.push_back({ 50, 119 });
-	noviceStartPosVector.push_back({ 50, 190 });
-	noviceStartPosVector.push_back({ 135, 190 });
-	noviceStartPosVector.push_back({ 135, 114 });
-	noviceStartPosVector.push_back({ 135, 45 });
+	intermediateStartPosVector.push_back({ 50, 54 });
+	intermediateStartPosVector.push_back({ 50, 119 });
+	intermediateStartPosVector.push_back({ 50, 190 });
+	intermediateStartPosVector.push_back({ 135, 190 });
+	intermediateStartPosVector.push_back({ 135, 114 });
+	intermediateStartPosVector.push_back({ 135, 45 });
 
 	std::vector<Pos> highStartPosVector;
 	highStartPosVector.push_back({ 47, 42 });
