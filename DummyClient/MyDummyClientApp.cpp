@@ -28,6 +28,10 @@ void MyDummyClientApp::Start()
 				_iocpCore->RegisterIOCP(loginNewConnection);
 				loginNewConnection->RequestLogin(i);
 			}
+
+			if (i % 100 == 0)
+				Sleep(10000);
+
 		}
 	}
 	catch (std::wstring error)

@@ -7,8 +7,6 @@ public:
 	ServerType serverType;
 	std::map<ServerType, std::vector<Pos>> startPos;
 	CriticalSectionObject cs;
-
-	uint32 count = 30;
 	uint32 index = 0;
 public:
 	static DataManager* GetInstance()
@@ -22,13 +20,8 @@ public:
 	Pos PopStartPos() 
 	{
 		LockGuard lockGuard(&cs);
-		count--;
-		if (count <= 0)
-		{
-			count = 30;
-			index++;
-			index %= 6;
-		}
+		index++;
+		index %= 10;
 		Pos pos  = startPos[serverType][index];
 		return pos;
 	}

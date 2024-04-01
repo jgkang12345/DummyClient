@@ -11,6 +11,29 @@ unsigned int _stdcall Dispatch(void* Args)
 	while (true)
 		app->GetIOCPCore()->Dispatch();
 }
+
+unsigned int _stdcall Update(void* Args)
+{	
+	int32 currentTick = ::GetTickCount64();
+	int32 lastTick = 0;
+	while (true)
+	{
+		currentTick = ::GetTickCount64();
+
+		if (lastTick == 0)
+			lastTick = currentTick;
+
+		int32 deltaTick = currentTick - lastTick;
+		if (deltaTick >= 200)
+		{
+			DummyConnectionContext::GetInstance()->Update(deltaTick);
+			Sleep(200);
+			lastTick = currentTick;
+		}
+	}
+}
+
+
 void NoviceServerInit();
 void VillageServerInit();
 void InterMediateServerInit();
@@ -40,18 +63,15 @@ void VillageServerInit()
 	MapManager::GetInstance()->MapLoad(ServerType::VILLAGE, "map\\VillageMap.dat");
 }
 
-int main() 
+int main(int argc, char* argv[])
 {
-	uint16 enterServer;
-	int32 dummyCount;
-	printf("어떤 서버에 입장할 것입니까?\n 30002=초보자필드, 30004=마을서버\n");
-	scanf_s("%d", &enterServer);
+	uint16 enterServer = std::atoi(argv[1]); // 30004 ~ 30011
+	uint16 dummyCount = std::atoi(argv[2]); // 500
+	uint16 offset = 1;
+
+	printf("DummyClient cnt: %d, enterPort: %d \n", dummyCount, enterServer);
+
 	const char* ip = "58.236.130.58";
-	printf("더미는 몇명 만들 것 입니까?\n");
-	scanf_s("%d", &dummyCount);
-	int32 offset;
-	printf("SQ Offset?\n");
-	scanf_s("%d", &offset);
 
 	switch (enterServer)
 	{
@@ -88,24 +108,7 @@ int main()
 		ThreadManager::GetInstacne()->Launch(Dispatch, &dummyClientApp);
 
 	dummyClientApp.Start();
-	int32 currentTick = ::GetTickCount64();
-	int32 lastTick = 0;
-	while (true) 
-	{
-		currentTick = ::GetTickCount64();
-		
-		if (lastTick == 0)
-			lastTick = currentTick;
-
-		int32 deltaTick = currentTick - lastTick;		
-		if (deltaTick >= 200) 
-		{
-			DummyConnectionContext::GetInstance()->Update(deltaTick);
-			Sleep(200);
-			lastTick = currentTick;
-		}
-	}
-
+	ThreadManager::GetInstacne()->Launch(Update, &dummyClientApp);
 	ThreadManager::GetInstacne()->AllJoin();
 	return 0;
 }
